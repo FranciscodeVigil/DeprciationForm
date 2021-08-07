@@ -24,12 +24,13 @@ namespace DeprciationForm
             set { endValue = value; Calc(); }
         }
 
-        private int lifetime;
-        public int Lifetime
-        { get { return lifetime; }
-          set { lifetime = value; Calc();  } 
+        private double lifetime;
+        public double Lifetime
+        {
+            get { return lifetime; }
+            set { lifetime = value; Calc(); }
         }
-        public decimal deprciationValue { get; set; }
+        public decimal deprciatedValue;
         //uses the DateTime struct
         public DateTime Start = new();
 
@@ -37,11 +38,11 @@ namespace DeprciationForm
         public virtual void Calc()
         {
             //Straight Line depriciation calculations
-            this.deprciationValue = (this.StartValue - this.EndValue) * (1 / this.Lifetime);
+            deprciatedValue = Decimal.Multiply((startValue - endValue), Convert.ToDecimal((1 / Lifetime)));
         }
         public override string ToString()
         {
-            return this.Title + " start value of $" + this.StartValue + " and end value of $" + this.EndValue + " life time of " + this.Lifetime;
+            return this.Title + " start value of $" + this.startValue + " and end value of $" + this.endValue + " life time of " + this.Lifetime;
         }
 
     }

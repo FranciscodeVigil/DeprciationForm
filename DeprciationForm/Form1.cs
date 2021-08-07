@@ -21,7 +21,7 @@ namespace DeprciationForm
                 " view a summary of your inventory's value in the summary tab ";
         }
 
-        private List<DepreciationStraightLine> Book = new();
+        private List<DepreciationStraightLine> Book = new List<DepreciationStraightLine>();
 
         private void Add()
         {
@@ -54,33 +54,42 @@ namespace DeprciationForm
 
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            //Creation of item changes based on which type of deoreciation is chosen
-            if (RDO.Checked)
+            try
             {
-                DepreciationStraightLine item = new();
-                item.Lifetime = Convert.ToInt32(textBox5.Text);
-                item.Title = textBox2.Text;
-                item.StartValue = Convert.ToDecimal(textBox3.Text);
-                item.EndValue = Convert.ToDecimal(textBox4.Text);
-                item.Start = dateTimePicker1.Value;
-                item.End = dateTimePicker2.Value;
+                //Creation of item changes based on which type of deoreciation is chosen
+                if (RDO.Checked)
+                {
+                    DepreciationStraightLine item = new();
+                    item.Lifetime = Convert.ToInt32(textBox5.Text);
+                    item.Title = textBox2.Text;
+                    item.StartValue = Convert.ToDecimal(textBox3.Text);
+                    item.EndValue = Convert.ToDecimal(textBox4.Text);
+                    item.Start = dateTimePicker1.Value;
+                    item.End = dateTimePicker2.Value;
 
-                Book.Add(item);
+                    Book.Add(item);
+                }
+                else
+                {
+                    DeprecitationDoubleDeclining item = new();
+                    item.Lifetime = Convert.ToInt32(textBox5.Text);
+                    item.Title = textBox2.Text;
+                    item.StartValue = Convert.ToDecimal(textBox3.Text);
+                    item.EndValue = Convert.ToDecimal(textBox4.Text);
+                    item.Start = dateTimePicker1.Value;
+                    item.End = dateTimePicker2.Value;
+
+                    Book.Add(item);
+                }
+                Add();
             }
-            else
+            catch (Exception)
             {
-                DeprecitationDoubleDeclining item = new();
-                item.Lifetime = Convert.ToInt32(textBox5.Text);
-                item.Title = textBox2.Text;
-                item.StartValue = Convert.ToDecimal(textBox3.Text);
-                item.EndValue = Convert.ToDecimal(textBox4.Text);
-                item.Start = dateTimePicker1.Value;
-                item.End = dateTimePicker2.Value;
-
-                Book.Add(item);
+                textBox2.Text = "Error try again";
             }
-            Add();
         }
+
+
 
         private void RemoveBtn_Click(object sender, EventArgs e)
         {
@@ -89,8 +98,8 @@ namespace DeprciationForm
             {
                 Book.RemoveAt(InvBox.SelectedIndex);
                 InvBox.Items.RemoveAt(InvBox.SelectedIndex);
-            } 
-            catch(Exception)
+            }
+            catch (Exception)
             {
 
             }
@@ -98,11 +107,11 @@ namespace DeprciationForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //attempts to calculate the final value by pressing the button but it doesn't work
+            //attempts to calculate the final value by pressing the button but doesn't work for the straight line at all?
             decimal value = 0M;
             foreach (DepreciationStraightLine item in Book)
             {
-                value += item.deprciationValue;
+                value += item.deprciatedValue;
             }
             textBox6.Text = ("The total value of your inventory is $" + value);
         }

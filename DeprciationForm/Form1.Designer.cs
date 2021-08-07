@@ -284,6 +284,7 @@ namespace DeprciationForm
             // InvBox
             // 
             this.InvBox.FormattingEnabled = true;
+            this.InvBox.HorizontalScrollbar = true;
             this.InvBox.ItemHeight = 20;
             this.InvBox.Location = new System.Drawing.Point(16, 34);
             this.InvBox.Name = "InvBox";

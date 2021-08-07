@@ -8,17 +8,15 @@ namespace DeprciationForm
 {
     class DeprecitationDoubleDeclining : DepreciationStraightLine
     {
-
-        public decimal depreciationValue;
-    public override void Calc()
+        public override void Calc()
         {
             // Calculates the deprciation with the Double declining type
-           decimal bgnYearVal = (2 * (1 / this.Lifetime) * this.StartValue);
-            for (int i = 0; i > this.Lifetime; i++)
+            decimal bgnYearVal = Decimal.Multiply(Convert.ToDecimal((1 / Lifetime)), (2 * StartValue));
+            for (int i = 0; i > Lifetime; i++)
             {
-               bgnYearVal = (2 * bgnYearVal * (1 / this.Lifetime));
+                bgnYearVal = Decimal.Multiply((2 * bgnYearVal), Convert.ToDecimal((1 / Lifetime)));
             }
-            this.deprciationValue = (this.StartValue - bgnYearVal);
+            deprciatedValue = (StartValue - bgnYearVal);
         }
         public override string ToString()
         {
